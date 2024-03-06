@@ -11,20 +11,18 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ArgsType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { CustomerWhereUniqueInput } from "./CustomerWhereUniqueInput";
-import { ValidateNested } from "class-validator";
+import { ProfileWhereInput } from "./ProfileWhereInput";
 import { Type } from "class-transformer";
 
 @ArgsType()
-class CustomerFindUniqueArgs {
+class ProfileCountArgs {
   @ApiProperty({
-    required: true,
-    type: () => CustomerWhereUniqueInput,
+    required: false,
+    type: () => ProfileWhereInput,
   })
-  @ValidateNested()
-  @Type(() => CustomerWhereUniqueInput)
-  @Field(() => CustomerWhereUniqueInput, { nullable: false })
-  where!: CustomerWhereUniqueInput;
+  @Field(() => ProfileWhereInput, { nullable: true })
+  @Type(() => ProfileWhereInput)
+  where?: ProfileWhereInput;
 }
 
-export { CustomerFindUniqueArgs as CustomerFindUniqueArgs };
+export { ProfileCountArgs as ProfileCountArgs };

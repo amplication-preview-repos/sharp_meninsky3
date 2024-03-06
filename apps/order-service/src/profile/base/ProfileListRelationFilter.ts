@@ -11,46 +11,46 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { CustomerWhereInput } from "./CustomerWhereInput";
+import { ProfileWhereInput } from "./ProfileWhereInput";
 import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
 
 @InputType()
-class CustomerListRelationFilter {
+class ProfileListRelationFilter {
   @ApiProperty({
     required: false,
-    type: () => CustomerWhereInput,
+    type: () => ProfileWhereInput,
   })
   @ValidateNested()
-  @Type(() => CustomerWhereInput)
+  @Type(() => ProfileWhereInput)
   @IsOptional()
-  @Field(() => CustomerWhereInput, {
+  @Field(() => ProfileWhereInput, {
     nullable: true,
   })
-  every?: CustomerWhereInput;
+  every?: ProfileWhereInput;
 
   @ApiProperty({
     required: false,
-    type: () => CustomerWhereInput,
+    type: () => ProfileWhereInput,
   })
   @ValidateNested()
-  @Type(() => CustomerWhereInput)
+  @Type(() => ProfileWhereInput)
   @IsOptional()
-  @Field(() => CustomerWhereInput, {
+  @Field(() => ProfileWhereInput, {
     nullable: true,
   })
-  some?: CustomerWhereInput;
+  some?: ProfileWhereInput;
 
   @ApiProperty({
     required: false,
-    type: () => CustomerWhereInput,
+    type: () => ProfileWhereInput,
   })
   @ValidateNested()
-  @Type(() => CustomerWhereInput)
+  @Type(() => ProfileWhereInput)
   @IsOptional()
-  @Field(() => CustomerWhereInput, {
+  @Field(() => ProfileWhereInput, {
     nullable: true,
   })
-  none?: CustomerWhereInput;
+  none?: ProfileWhereInput;
 }
-export { CustomerListRelationFilter as CustomerListRelationFilter };
+export { ProfileListRelationFilter as ProfileListRelationFilter };

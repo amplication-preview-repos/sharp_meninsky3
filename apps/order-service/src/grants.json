@@ -301,151 +301,151 @@
   },
   {
     "role": "user",
-    "resource": "Customer",
+    "resource": "Profile",
     "action": "read:own",
     "attributes": "*"
   },
   {
     "role": "customer",
-    "resource": "Customer",
+    "resource": "Profile",
     "action": "read:own",
     "attributes": "*"
   },
   {
     "role": "admin",
-    "resource": "Customer",
+    "resource": "Profile",
     "action": "read:own",
     "attributes": "*"
   },
   {
     "role": "superadmin",
-    "resource": "Customer",
+    "resource": "Profile",
     "action": "read:own",
     "attributes": "*"
   },
   {
     "role": "provider",
-    "resource": "Customer",
+    "resource": "Profile",
     "action": "read:own",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Customer",
+    "resource": "Profile",
     "action": "create:any",
     "attributes": "*"
   },
   {
     "role": "customer",
-    "resource": "Customer",
+    "resource": "Profile",
     "action": "create:any",
     "attributes": "*"
   },
   {
     "role": "admin",
-    "resource": "Customer",
+    "resource": "Profile",
     "action": "create:any",
     "attributes": "*"
   },
   {
     "role": "superadmin",
-    "resource": "Customer",
+    "resource": "Profile",
     "action": "create:any",
     "attributes": "*"
   },
   {
     "role": "provider",
-    "resource": "Customer",
+    "resource": "Profile",
     "action": "create:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Customer",
+    "resource": "Profile",
     "action": "update:any",
     "attributes": "*"
   },
   {
     "role": "customer",
-    "resource": "Customer",
+    "resource": "Profile",
     "action": "update:any",
     "attributes": "*"
   },
   {
     "role": "admin",
-    "resource": "Customer",
+    "resource": "Profile",
     "action": "update:any",
     "attributes": "*"
   },
   {
     "role": "superadmin",
-    "resource": "Customer",
+    "resource": "Profile",
     "action": "update:any",
     "attributes": "*"
   },
   {
     "role": "provider",
-    "resource": "Customer",
+    "resource": "Profile",
     "action": "update:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Customer",
+    "resource": "Profile",
     "action": "delete:any",
     "attributes": "*"
   },
   {
     "role": "customer",
-    "resource": "Customer",
+    "resource": "Profile",
     "action": "delete:any",
     "attributes": "*"
   },
   {
     "role": "admin",
-    "resource": "Customer",
+    "resource": "Profile",
     "action": "delete:any",
     "attributes": "*"
   },
   {
     "role": "superadmin",
-    "resource": "Customer",
+    "resource": "Profile",
     "action": "delete:any",
     "attributes": "*"
   },
   {
     "role": "provider",
-    "resource": "Customer",
+    "resource": "Profile",
     "action": "delete:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Customer",
+    "resource": "Profile",
     "action": "read:any",
     "attributes": "*"
   },
   {
     "role": "customer",
-    "resource": "Customer",
+    "resource": "Profile",
     "action": "read:any",
     "attributes": "*"
   },
   {
     "role": "admin",
-    "resource": "Customer",
+    "resource": "Profile",
     "action": "read:any",
     "attributes": "*"
   },
   {
     "role": "superadmin",
-    "resource": "Customer",
+    "resource": "Profile",
     "action": "read:any",
     "attributes": "*"
   },
   {
     "role": "provider",
-    "resource": "Customer",
+    "resource": "Profile",
     "action": "read:any",
     "attributes": "*"
   },

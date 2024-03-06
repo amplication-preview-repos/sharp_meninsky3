@@ -19,7 +19,7 @@ import {
   IsInt,
 } from "class-validator";
 import { Type } from "class-transformer";
-import { Customer } from "../../customer/base/Customer";
+import { Profile } from "../../profile/base/Profile";
 
 @ObjectType()
 class Address {
@@ -66,12 +66,12 @@ class Address {
 
   @ApiProperty({
     required: false,
-    type: () => [Customer],
+    type: () => [Profile],
   })
   @ValidateNested()
-  @Type(() => Customer)
+  @Type(() => Profile)
   @IsOptional()
-  customers?: Array<Customer>;
+  customers?: Array<Profile>;
 
   @ApiProperty({
     required: true,

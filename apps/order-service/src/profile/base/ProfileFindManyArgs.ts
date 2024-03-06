@@ -11,32 +11,32 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ArgsType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { CustomerWhereInput } from "./CustomerWhereInput";
+import { ProfileWhereInput } from "./ProfileWhereInput";
 import { IsOptional, ValidateNested, IsInt } from "class-validator";
 import { Type } from "class-transformer";
-import { CustomerOrderByInput } from "./CustomerOrderByInput";
+import { ProfileOrderByInput } from "./ProfileOrderByInput";
 
 @ArgsType()
-class CustomerFindManyArgs {
+class ProfileFindManyArgs {
   @ApiProperty({
     required: false,
-    type: () => CustomerWhereInput,
+    type: () => ProfileWhereInput,
   })
   @IsOptional()
   @ValidateNested()
-  @Field(() => CustomerWhereInput, { nullable: true })
-  @Type(() => CustomerWhereInput)
-  where?: CustomerWhereInput;
+  @Field(() => ProfileWhereInput, { nullable: true })
+  @Type(() => ProfileWhereInput)
+  where?: ProfileWhereInput;
 
   @ApiProperty({
     required: false,
-    type: [CustomerOrderByInput],
+    type: [ProfileOrderByInput],
   })
   @IsOptional()
   @ValidateNested({ each: true })
-  @Field(() => [CustomerOrderByInput], { nullable: true })
-  @Type(() => CustomerOrderByInput)
-  orderBy?: Array<CustomerOrderByInput>;
+  @Field(() => [ProfileOrderByInput], { nullable: true })
+  @Type(() => ProfileOrderByInput)
+  orderBy?: Array<ProfileOrderByInput>;
 
   @ApiProperty({
     required: false,
@@ -59,4 +59,4 @@ class CustomerFindManyArgs {
   take?: number;
 }
 
-export { CustomerFindManyArgs as CustomerFindManyArgs };
+export { ProfileFindManyArgs as ProfileFindManyArgs };

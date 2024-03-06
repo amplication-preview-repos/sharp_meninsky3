@@ -26,9 +26,9 @@ import { Address } from "./Address";
 import { AddressFindManyArgs } from "./AddressFindManyArgs";
 import { AddressWhereUniqueInput } from "./AddressWhereUniqueInput";
 import { AddressUpdateInput } from "./AddressUpdateInput";
-import { CustomerFindManyArgs } from "../../customer/base/CustomerFindManyArgs";
-import { Customer } from "../../customer/base/Customer";
-import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
+import { ProfileFindManyArgs } from "../../profile/base/ProfileFindManyArgs";
+import { Profile } from "../../profile/base/Profile";
+import { ProfileWhereUniqueInput } from "../../profile/base/ProfileWhereUniqueInput";
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
@@ -212,17 +212,17 @@ export class AddressControllerBase {
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @common.Get("/:id/customers")
-  @ApiNestedQuery(CustomerFindManyArgs)
+  @ApiNestedQuery(ProfileFindManyArgs)
   @nestAccessControl.UseRoles({
-    resource: "Customer",
+    resource: "Profile",
     action: "read",
     possession: "any",
   })
   async findCustomers(
     @common.Req() request: Request,
     @common.Param() params: AddressWhereUniqueInput
-  ): Promise<Customer[]> {
-    const query = plainToClass(CustomerFindManyArgs, request.query);
+  ): Promise<Profile[]> {
+    const query = plainToClass(ProfileFindManyArgs, request.query);
     const results = await this.service.findCustomers(params.id, {
       ...query,
       select: {
@@ -257,7 +257,7 @@ export class AddressControllerBase {
   })
   async connectCustomers(
     @common.Param() params: AddressWhereUniqueInput,
-    @common.Body() body: CustomerWhereUniqueInput[]
+    @common.Body() body: ProfileWhereUniqueInput[]
   ): Promise<void> {
     const data = {
       customers: {
@@ -279,7 +279,7 @@ export class AddressControllerBase {
   })
   async updateCustomers(
     @common.Param() params: AddressWhereUniqueInput,
-    @common.Body() body: CustomerWhereUniqueInput[]
+    @common.Body() body: ProfileWhereUniqueInput[]
   ): Promise<void> {
     const data = {
       customers: {
@@ -301,7 +301,7 @@ export class AddressControllerBase {
   })
   async disconnectCustomers(
     @common.Param() params: AddressWhereUniqueInput,
-    @common.Body() body: CustomerWhereUniqueInput[]
+    @common.Body() body: ProfileWhereUniqueInput[]
   ): Promise<void> {
     const data = {
       customers: {

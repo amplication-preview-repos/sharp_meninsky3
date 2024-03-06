@@ -14,7 +14,7 @@ import { PrismaService } from "../../prisma/prisma.service";
 import {
   Prisma,
   Address, // @ts-ignore
-  Customer,
+  Profile,
 } from "@prisma/client";
 
 export class AddressServiceBase {
@@ -54,8 +54,8 @@ export class AddressServiceBase {
 
   async findCustomers(
     parentId: string,
-    args: Prisma.CustomerFindManyArgs
-  ): Promise<Customer[]> {
+    args: Prisma.ProfileFindManyArgs
+  ): Promise<Profile[]> {
     return this.prisma.address
       .findUniqueOrThrow({
         where: { id: parentId },

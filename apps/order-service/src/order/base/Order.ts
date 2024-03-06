@@ -20,7 +20,7 @@ import {
   IsInt,
 } from "class-validator";
 import { Type } from "class-transformer";
-import { Customer } from "../../customer/base/Customer";
+import { Profile } from "../../profile/base/Profile";
 import { Product } from "../../product/base/Product";
 
 @ObjectType()
@@ -35,12 +35,12 @@ class Order {
 
   @ApiProperty({
     required: false,
-    type: () => Customer,
+    type: () => Profile,
   })
   @ValidateNested()
-  @Type(() => Customer)
+  @Type(() => Profile)
   @IsOptional()
-  customer?: Customer | null;
+  customer?: Profile | null;
 
   @ApiProperty({
     required: false,

@@ -14,7 +14,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
-import { CustomerListRelationFilter } from "../../customer/base/CustomerListRelationFilter";
+import { ProfileListRelationFilter } from "../../profile/base/ProfileListRelationFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { IntNullableFilter } from "../../util/IntNullableFilter";
 
@@ -55,15 +55,15 @@ class AddressWhereInput {
 
   @ApiProperty({
     required: false,
-    type: () => CustomerListRelationFilter,
+    type: () => ProfileListRelationFilter,
   })
   @ValidateNested()
-  @Type(() => CustomerListRelationFilter)
+  @Type(() => ProfileListRelationFilter)
   @IsOptional()
-  @Field(() => CustomerListRelationFilter, {
+  @Field(() => ProfileListRelationFilter, {
     nullable: true,
   })
-  customers?: CustomerListRelationFilter;
+  customers?: ProfileListRelationFilter;
 
   @ApiProperty({
     required: false,

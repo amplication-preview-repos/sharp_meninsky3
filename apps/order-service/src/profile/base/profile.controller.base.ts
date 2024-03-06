@@ -18,40 +18,40 @@ import { plainToClass } from "class-transformer";
 import { ApiNestedQuery } from "../../decorators/api-nested-query.decorator";
 import * as nestAccessControl from "nest-access-control";
 import * as defaultAuthGuard from "../../auth/defaultAuth.guard";
-import { CustomerService } from "../customer.service";
+import { ProfileService } from "../profile.service";
 import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
 import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
-import { CustomerCreateInput } from "./CustomerCreateInput";
-import { Customer } from "./Customer";
-import { CustomerFindManyArgs } from "./CustomerFindManyArgs";
-import { CustomerWhereUniqueInput } from "./CustomerWhereUniqueInput";
-import { CustomerUpdateInput } from "./CustomerUpdateInput";
+import { ProfileCreateInput } from "./ProfileCreateInput";
+import { Profile } from "./Profile";
+import { ProfileFindManyArgs } from "./ProfileFindManyArgs";
+import { ProfileWhereUniqueInput } from "./ProfileWhereUniqueInput";
+import { ProfileUpdateInput } from "./ProfileUpdateInput";
 import { OrderFindManyArgs } from "../../order/base/OrderFindManyArgs";
 import { Order } from "../../order/base/Order";
 import { OrderWhereUniqueInput } from "../../order/base/OrderWhereUniqueInput";
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
-export class CustomerControllerBase {
+export class ProfileControllerBase {
   constructor(
-    protected readonly service: CustomerService,
+    protected readonly service: ProfileService,
     protected readonly rolesBuilder: nestAccessControl.RolesBuilder
   ) {}
   @common.UseInterceptors(AclValidateRequestInterceptor)
   @common.Post()
-  @swagger.ApiCreatedResponse({ type: Customer })
+  @swagger.ApiCreatedResponse({ type: Profile })
   @nestAccessControl.UseRoles({
-    resource: "Customer",
+    resource: "Profile",
     action: "create",
     possession: "any",
   })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
-  async createCustomer(
-    @common.Body() data: CustomerCreateInput
-  ): Promise<Customer> {
-    return await this.service.createCustomer({
+  async createProfile(
+    @common.Body() data: ProfileCreateInput
+  ): Promise<Profile> {
+    return await this.service.createProfile({
       data: {
         ...data,
 
@@ -81,19 +81,19 @@ export class CustomerControllerBase {
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @common.Get()
-  @swagger.ApiOkResponse({ type: [Customer] })
-  @ApiNestedQuery(CustomerFindManyArgs)
+  @swagger.ApiOkResponse({ type: [Profile] })
+  @ApiNestedQuery(ProfileFindManyArgs)
   @nestAccessControl.UseRoles({
-    resource: "Customer",
+    resource: "Profile",
     action: "read",
     possession: "any",
   })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
-  async customers(@common.Req() request: Request): Promise<Customer[]> {
-    const args = plainToClass(CustomerFindManyArgs, request.query);
-    return this.service.customers({
+  async profiles(@common.Req() request: Request): Promise<Profile[]> {
+    const args = plainToClass(ProfileFindManyArgs, request.query);
+    return this.service.profiles({
       ...args,
       select: {
         address: {
@@ -115,20 +115,20 @@ export class CustomerControllerBase {
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @common.Get("/:id")
-  @swagger.ApiOkResponse({ type: Customer })
+  @swagger.ApiOkResponse({ type: Profile })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @nestAccessControl.UseRoles({
-    resource: "Customer",
+    resource: "Profile",
     action: "read",
     possession: "own",
   })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
-  async customer(
-    @common.Param() params: CustomerWhereUniqueInput
-  ): Promise<Customer | null> {
-    const result = await this.service.customer({
+  async profile(
+    @common.Param() params: ProfileWhereUniqueInput
+  ): Promise<Profile | null> {
+    const result = await this.service.profile({
       where: params,
       select: {
         address: {
@@ -156,22 +156,22 @@ export class CustomerControllerBase {
 
   @common.UseInterceptors(AclValidateRequestInterceptor)
   @common.Patch("/:id")
-  @swagger.ApiOkResponse({ type: Customer })
+  @swagger.ApiOkResponse({ type: Profile })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @nestAccessControl.UseRoles({
-    resource: "Customer",
+    resource: "Profile",
     action: "update",
     possession: "any",
   })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
-  async updateCustomer(
-    @common.Param() params: CustomerWhereUniqueInput,
-    @common.Body() data: CustomerUpdateInput
-  ): Promise<Customer | null> {
+  async updateProfile(
+    @common.Param() params: ProfileWhereUniqueInput,
+    @common.Body() data: ProfileUpdateInput
+  ): Promise<Profile | null> {
     try {
-      return await this.service.updateCustomer({
+      return await this.service.updateProfile({
         where: params,
         data: {
           ...data,
@@ -209,21 +209,21 @@ export class CustomerControllerBase {
   }
 
   @common.Delete("/:id")
-  @swagger.ApiOkResponse({ type: Customer })
+  @swagger.ApiOkResponse({ type: Profile })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @nestAccessControl.UseRoles({
-    resource: "Customer",
+    resource: "Profile",
     action: "delete",
     possession: "any",
   })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
-  async deleteCustomer(
-    @common.Param() params: CustomerWhereUniqueInput
-  ): Promise<Customer | null> {
+  async deleteProfile(
+    @common.Param() params: ProfileWhereUniqueInput
+  ): Promise<Profile | null> {
     try {
-      return await this.service.deleteCustomer({
+      return await this.service.deleteProfile({
         where: params,
         select: {
           address: {
@@ -261,7 +261,7 @@ export class CustomerControllerBase {
   })
   async findOrders(
     @common.Req() request: Request,
-    @common.Param() params: CustomerWhereUniqueInput
+    @common.Param() params: ProfileWhereUniqueInput
   ): Promise<Order[]> {
     const query = plainToClass(OrderFindManyArgs, request.query);
     const results = await this.service.findOrders(params.id, {
@@ -299,12 +299,12 @@ export class CustomerControllerBase {
 
   @common.Post("/:id/orders")
   @nestAccessControl.UseRoles({
-    resource: "Customer",
+    resource: "Profile",
     action: "update",
     possession: "any",
   })
   async connectOrders(
-    @common.Param() params: CustomerWhereUniqueInput,
+    @common.Param() params: ProfileWhereUniqueInput,
     @common.Body() body: OrderWhereUniqueInput[]
   ): Promise<void> {
     const data = {
@@ -312,7 +312,7 @@ export class CustomerControllerBase {
         connect: body,
       },
     };
-    await this.service.updateCustomer({
+    await this.service.updateProfile({
       where: params,
       data,
       select: { id: true },
@@ -321,12 +321,12 @@ export class CustomerControllerBase {
 
   @common.Patch("/:id/orders")
   @nestAccessControl.UseRoles({
-    resource: "Customer",
+    resource: "Profile",
     action: "update",
     possession: "any",
   })
   async updateOrders(
-    @common.Param() params: CustomerWhereUniqueInput,
+    @common.Param() params: ProfileWhereUniqueInput,
     @common.Body() body: OrderWhereUniqueInput[]
   ): Promise<void> {
     const data = {
@@ -334,7 +334,7 @@ export class CustomerControllerBase {
         set: body,
       },
     };
-    await this.service.updateCustomer({
+    await this.service.updateProfile({
       where: params,
       data,
       select: { id: true },
@@ -343,12 +343,12 @@ export class CustomerControllerBase {
 
   @common.Delete("/:id/orders")
   @nestAccessControl.UseRoles({
-    resource: "Customer",
+    resource: "Profile",
     action: "update",
     possession: "any",
   })
   async disconnectOrders(
-    @common.Param() params: CustomerWhereUniqueInput,
+    @common.Param() params: ProfileWhereUniqueInput,
     @common.Body() body: OrderWhereUniqueInput[]
   ): Promise<void> {
     const data = {
@@ -356,7 +356,7 @@ export class CustomerControllerBase {
         disconnect: body,
       },
     };
-    await this.service.updateCustomer({
+    await this.service.updateProfile({
       where: params,
       data,
       select: { id: true },

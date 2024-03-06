@@ -12,8 +12,8 @@ import { ACLModule } from "../../auth/acl.module";
 import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
 import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
 import { map } from "rxjs";
-import { CustomerController } from "../customer.controller";
-import { CustomerService } from "../customer.service";
+import { ProfileController } from "../profile.controller";
+import { ProfileService } from "../profile.service";
 
 const nonExistingId = "nonExistingId";
 const existingId = "existingId";
@@ -57,11 +57,11 @@ const FIND_ONE_RESULT = {
 };
 
 const service = {
-  createCustomer() {
+  createProfile() {
     return CREATE_RESULT;
   },
-  customers: () => FIND_MANY_RESULT,
-  customer: ({ where }: { where: { id: string } }) => {
+  profiles: () => FIND_MANY_RESULT,
+  profile: ({ where }: { where: { id: string } }) => {
     switch (where.id) {
       case existingId:
         return FIND_ONE_RESULT;
@@ -103,18 +103,18 @@ const aclValidateRequestInterceptor = {
   },
 };
 
-describe("Customer", () => {
+describe("Profile", () => {
   let app: INestApplication;
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       providers: [
         {
-          provide: CustomerService,
+          provide: ProfileService,
           useValue: service,
         },
       ],
-      controllers: [CustomerController],
+      controllers: [ProfileController],
       imports: [ACLModule],
     })
       .overrideGuard(DefaultAuthGuard)
@@ -131,9 +131,9 @@ describe("Customer", () => {
     await app.init();
   });
 
-  test("POST /customers", async () => {
+  test("POST /profiles", async () => {
     await request(app.getHttpServer())
-      .post("/customers")
+      .post("/profiles")
       .send(CREATE_INPUT)
       .expect(HttpStatus.CREATED)
       .expect({
@@ -143,9 +143,9 @@ describe("Customer", () => {
       });
   });
 
-  test("GET /customers", async () => {
+  test("GET /profiles", async () => {
     await request(app.getHttpServer())
-      .get("/customers")
+      .get("/profiles")
       .expect(HttpStatus.OK)
       .expect([
         {
@@ -156,9 +156,9 @@ describe("Customer", () => {
       ]);
   });
 
-  test("GET /customers/:id non existing", async () => {
+  test("GET /profiles/:id non existing", async () => {
     await request(app.getHttpServer())
-      .get(`${"/customers"}/${nonExistingId}`)
+      .get(`${"/profiles"}/${nonExistingId}`)
       .expect(HttpStatus.NOT_FOUND)
       .expect({
         statusCode: HttpStatus.NOT_FOUND,
@@ -167,9 +167,9 @@ describe("Customer", () => {
       });
   });
 
-  test("GET /customers/:id existing", async () => {
+  test("GET /profiles/:id existing", async () => {
     await request(app.getHttpServer())
-      .get(`${"/customers"}/${existingId}`)
+      .get(`${"/profiles"}/${existingId}`)
       .expect(HttpStatus.OK)
       .expect({
         ...FIND_ONE_RESULT,
@@ -178,10 +178,10 @@ describe("Customer", () => {
       });
   });
 
-  test("POST /customers existing resource", async () => {
+  test("POST /profiles existing resource", async () => {
     const agent = request(app.getHttpServer());
     await agent
-      .post("/customers")
+      .post("/profiles")
       .send(CREATE_INPUT)
       .expect(HttpStatus.CREATED)
       .expect({
@@ -191,7 +191,7 @@ describe("Customer", () => {
       })
       .then(function () {
         agent
-          .post("/customers")
+          .post("/profiles")
           .send(CREATE_INPUT)
           .expect(HttpStatus.CONFLICT)
           .expect({

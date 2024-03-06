@@ -12,14 +12,12 @@ https://docs.amplication.com/how-to/custom-code
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { AddressWhereUniqueInput } from "../../address/base/AddressWhereUniqueInput";
-import { ValidateNested, IsOptional } from "class-validator";
+import { ValidateNested, IsOptional, IsString } from "class-validator";
 import { Type } from "class-transformer";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
-import { StringFilter } from "../../util/StringFilter";
-import { OrderListRelationFilter } from "../../order/base/OrderListRelationFilter";
+import { OrderUpdateManyWithoutProfilesInput } from "./OrderUpdateManyWithoutProfilesInput";
 
 @InputType()
-class CustomerWhereInput {
+class ProfileUpdateInput {
   @ApiProperty({
     required: false,
     type: () => AddressWhereUniqueInput,
@@ -30,74 +28,63 @@ class CustomerWhereInput {
   @Field(() => AddressWhereUniqueInput, {
     nullable: true,
   })
-  address?: AddressWhereUniqueInput;
+  address?: AddressWhereUniqueInput | null;
 
   @ApiProperty({
     required: false,
-    type: StringNullableFilter,
+    type: String,
   })
-  @Type(() => StringNullableFilter)
+  @IsString()
   @IsOptional()
-  @Field(() => StringNullableFilter, {
+  @Field(() => String, {
     nullable: true,
   })
-  email?: StringNullableFilter;
+  email?: string | null;
 
   @ApiProperty({
     required: false,
-    type: StringNullableFilter,
+    type: String,
   })
-  @Type(() => StringNullableFilter)
+  @IsString()
   @IsOptional()
-  @Field(() => StringNullableFilter, {
+  @Field(() => String, {
     nullable: true,
   })
-  firstName?: StringNullableFilter;
+  firstName?: string | null;
 
   @ApiProperty({
     required: false,
-    type: StringFilter,
+    type: String,
   })
-  @Type(() => StringFilter)
+  @IsString()
   @IsOptional()
-  @Field(() => StringFilter, {
+  @Field(() => String, {
     nullable: true,
   })
-  id?: StringFilter;
+  lastName?: string | null;
 
   @ApiProperty({
     required: false,
-    type: StringNullableFilter,
-  })
-  @Type(() => StringNullableFilter)
-  @IsOptional()
-  @Field(() => StringNullableFilter, {
-    nullable: true,
-  })
-  lastName?: StringNullableFilter;
-
-  @ApiProperty({
-    required: false,
-    type: () => OrderListRelationFilter,
+    type: () => OrderUpdateManyWithoutProfilesInput,
   })
   @ValidateNested()
-  @Type(() => OrderListRelationFilter)
+  @Type(() => OrderUpdateManyWithoutProfilesInput)
   @IsOptional()
-  @Field(() => OrderListRelationFilter, {
+  @Field(() => OrderUpdateManyWithoutProfilesInput, {
     nullable: true,
   })
-  orders?: OrderListRelationFilter;
+  orders?: OrderUpdateManyWithoutProfilesInput;
 
   @ApiProperty({
     required: false,
-    type: StringNullableFilter,
+    type: String,
   })
-  @Type(() => StringNullableFilter)
+  @IsString()
   @IsOptional()
-  @Field(() => StringNullableFilter, {
+  @Field(() => String, {
     nullable: true,
   })
-  phone?: StringNullableFilter;
+  phone?: string | null;
 }
 
-export { CustomerWhereInput as CustomerWhereInput };
+export { ProfileUpdateInput as ProfileUpdateInput };

@@ -9,31 +9,26 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { ObjectType, Field } from "@nestjs/graphql";
+import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { Address } from "../../address/base/Address";
-import { ValidateNested, IsOptional, IsDate, IsString } from "class-validator";
+import { AddressWhereUniqueInput } from "../../address/base/AddressWhereUniqueInput";
+import { ValidateNested, IsOptional, IsString } from "class-validator";
 import { Type } from "class-transformer";
-import { Order } from "../../order/base/Order";
+import { OrderCreateNestedManyWithoutProfilesInput } from "./OrderCreateNestedManyWithoutProfilesInput";
 
-@ObjectType()
-class Customer {
+@InputType()
+class ProfileCreateInput {
   @ApiProperty({
     required: false,
-    type: () => Address,
+    type: () => AddressWhereUniqueInput,
   })
   @ValidateNested()
-  @Type(() => Address)
+  @Type(() => AddressWhereUniqueInput)
   @IsOptional()
-  address?: Address | null;
-
-  @ApiProperty({
-    required: true,
+  @Field(() => AddressWhereUniqueInput, {
+    nullable: true,
   })
-  @IsDate()
-  @Type(() => Date)
-  @Field(() => Date)
-  createdAt!: Date;
+  address?: AddressWhereUniqueInput | null;
 
   @ApiProperty({
     required: false,
@@ -44,7 +39,7 @@ class Customer {
   @Field(() => String, {
     nullable: true,
   })
-  email!: string | null;
+  email?: string | null;
 
   @ApiProperty({
     required: false,
@@ -55,15 +50,7 @@ class Customer {
   @Field(() => String, {
     nullable: true,
   })
-  firstName!: string | null;
-
-  @ApiProperty({
-    required: true,
-    type: String,
-  })
-  @IsString()
-  @Field(() => String)
-  id!: string;
+  firstName?: string | null;
 
   @ApiProperty({
     required: false,
@@ -74,16 +61,19 @@ class Customer {
   @Field(() => String, {
     nullable: true,
   })
-  lastName!: string | null;
+  lastName?: string | null;
 
   @ApiProperty({
     required: false,
-    type: () => [Order],
+    type: () => OrderCreateNestedManyWithoutProfilesInput,
   })
   @ValidateNested()
-  @Type(() => Order)
+  @Type(() => OrderCreateNestedManyWithoutProfilesInput)
   @IsOptional()
-  orders?: Array<Order>;
+  @Field(() => OrderCreateNestedManyWithoutProfilesInput, {
+    nullable: true,
+  })
+  orders?: OrderCreateNestedManyWithoutProfilesInput;
 
   @ApiProperty({
     required: false,
@@ -94,15 +84,7 @@ class Customer {
   @Field(() => String, {
     nullable: true,
   })
-  phone!: string | null;
-
-  @ApiProperty({
-    required: true,
-  })
-  @IsDate()
-  @Type(() => Date)
-  @Field(() => Date)
-  updatedAt!: Date;
+  phone?: string | null;
 }
 
-export { Customer as Customer };
+export { ProfileCreateInput as ProfileCreateInput };
